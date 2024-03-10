@@ -3,7 +3,7 @@ name: Build and push to ghcr.io for latest Scrypto version
 on:
   push:
     branches:
-      - master
+      - main
       
 jobs:
   build_and_push:
