@@ -18,5 +18,5 @@ jobs:
         - name: Build and push
           run: |
             docker login ghcr.io -u ${{ secrets.PACKAGE_MANAGER_USER}} --password ${{ secrets.PACKAGE_MANAGER_PW }}
-            docker build -f Dockerfile -t ghcr.io/weftfinance/scrypto-builder:${{ steps.scrypto.outputs.release }} -t ghcr.io/${{ github.repository }}:latest .
+            docker build -f Dockerfile -t ghcr.io/weftfinance/scrypto-builder:${{ steps.scrypto.outputs.release }} -t ghcr.io/weftfinance/scrypto-builder:latest .
             docker push ghcr.io/${{ github.repository }} --all-tags
