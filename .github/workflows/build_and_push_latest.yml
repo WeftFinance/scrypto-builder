@@ -22,5 +22,5 @@ jobs:
         - name: Build and push
           run: |
             docker login ghcr.io -u ${{ secrets.PACKAGE_MANAGER_USER}} --password ${{ secrets.PACKAGE_MANAGER_PW }}
-            docker build -f Dockerfile -t ghcr.io/${REPO}:${{ steps.scrypto.outputs.release }} -t ghcr.io/${{ github.repository }}:latest .
+            docker build -f Dockerfile -t ghcr.io/${GITHUB_REPOSITORY,,}:${{ steps.scrypto.outputs.release }} -t ghcr.io/${{ github.repository }}:latest .
             docker push ghcr.io/${{ github.repository }} --all-tags
