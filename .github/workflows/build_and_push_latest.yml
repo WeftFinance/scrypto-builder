@@ -9,6 +9,11 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     steps:
+        - name: set lower case owner name
+          run: |
+            echo "REPOSITORY=${REPOSITORY_RAW,,}" >>${GITHUB_ENV}
+          env:
+            REPOSITORY_RAW: '${{ github.repository }}'
         - id: scrypto
           uses: pozetroninc/github-action-get-latest-release@master
           with:
@@ -18,5 +23,5 @@ jobs:
         - name: Build and push
           run: |
             docker login ghcr.io -u ${{ secrets.PACKAGE_MANAGER_USER}} --password ${{ secrets.PACKAGE_MANAGER_PW }}
-            docker build -f Dockerfile -t ghcr.io/${{ github.repository }}:${{ steps.scrypto.outputs.release }} -t ghcr.io/${{ github.repository }}:latest .
+            docker build -f Dockerfile -t ghcr.io/${{ github.env.REPOSITORY }}:${{ steps.scrypto.outputs.release }} -t ghcr.io/${{ github.repository }}:latest .
             docker push ghcr.io/${{ github.repository }} --all-tags
