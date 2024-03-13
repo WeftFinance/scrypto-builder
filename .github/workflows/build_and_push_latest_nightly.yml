@@ -1,0 +1,22 @@
+name: Build and push to ghcr.io for latest Scrypto version
+
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+        - id: scrypto
+          uses: pozetroninc/github-action-get-latest-release@master
+          with:
+            repository: radixdlt/radixdlt-scrypto
+            excludes: prerelease, draft
+        - uses: actions/checkout@v4
+        - name: Build and push
+          run: |
+            docker login ghcr.io -u ${{ secrets.PACKAGE_MANAGER_USER}} --password ${{ secrets.PACKAGE_MANAGER_PW }}
+            docker build -f DockerfileNightly -t ghcr.io/weftfinance/scrypto-builder:${{ steps.scrypto.outputs.release }}-nightly -t ghcr.io/weftfinance/scrypto-builder:latest-nightly .
+            docker push ghcr.io/weftfinance/scrypto-builder --all-tags
