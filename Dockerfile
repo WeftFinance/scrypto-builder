@@ -2,12 +2,7 @@
 FROM rust:slim-bullseye 
 
 # Install ling build tools
-RUN apt update && apt install -y \
-    cmake=3.18.4-2+deb11u1 \
-    clang=1:11.0-51+nmu5 \
-    build-essential=12.9 \
-    llvm=1:11.0-51+nmu5 \
-    git
+RUN apt update && apt install -y cmake clang build-essential llvm git
 
 # Set the working directory to /usr/src/app
 WORKDIR /usr/src/app
