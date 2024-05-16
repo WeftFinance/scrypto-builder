@@ -14,7 +14,6 @@ RUN rustup component add rustfmt
 RUN rustup component add clippy
 RUN cargo install cargo-audit
 RUN git clone https://github.com/radixdlt/radixdlt-scrypto.git
-# RUN cd radixdlt-scrypto && git checkout tags/v1.0.1
 RUN cargo install --path ./radixdlt-scrypto/simulator
 
 # Set working directory as /src
