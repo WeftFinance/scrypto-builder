@@ -8,7 +8,7 @@ RUN apt update && apt install -y cmake clang build-essential llvm git
 WORKDIR /usr/src/app
 
 # Install rust tools
-RUN rustup update stable
+RUN rustup default 1.77.2
 RUN rustup target add wasm32-unknown-unknown
 RUN rustup component add rustfmt
 RUN rustup component add clippy
