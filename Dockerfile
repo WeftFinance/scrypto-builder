@@ -12,9 +12,12 @@ RUN rustup default 1.77.2
 RUN rustup target add wasm32-unknown-unknown
 RUN rustup component add rustfmt
 RUN rustup component add clippy
+
+# Install audit tools
 RUN cargo install cargo-audit
-RUN git clone https://github.com/radixdlt/radixdlt-scrypto.git
-RUN cargo install --path ./radixdlt-scrypto/simulator
+
+# Install Scrypto
+RUN cargo install --force radix-clis@1.2.0
 
 # Set working directory as /src
 WORKDIR /src
