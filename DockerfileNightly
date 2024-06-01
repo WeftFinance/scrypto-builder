@@ -10,13 +10,15 @@ WORKDIR /usr/src/app
 
 # Install rust tools
 RUN rustup target add wasm32-unknown-unknown
-RUN rustup install nightly-2024-02-08
-RUN rustup target add wasm32-unknown-unknown --toolchain=nightly-2024-02-08
+# RUN rustup install nightly-2024-02-08
+# RUN rustup target add wasm32-unknown-unknown --toolchain=nightly-2024-02-08
+RUN rustup install nightly
+RUN rustup target add wasm32-unknown-unknown --toolchain=nightly
 RUN apt install -y lsb-release wget software-properties-common gnupg
 RUN bash -c "$(wget -O - https://apt.llvm.org/llvm.sh 17)"
-RUN rustup component add rustfmt
-RUN rustup component add clippy
-RUN cargo install cargo-audit
+# RUN rustup component add rustfmt
+# RUN rustup component add clippy
+# RUN cargo install cargo-audit
 # Install Scrypto
 # RUN git clone https://github.com/radixdlt/radixdlt-scrypto.git
 # RUN cd radixdlt-scrypto && git checkout tags/v1.0.1
