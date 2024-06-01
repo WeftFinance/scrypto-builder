@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 # Install rust tools
 RUN rustup target add wasm32-unknown-unknown
 RUN rustup install nightly-2024-02-08
-RUN rustup target add wasm32-unknown-unknown --toolchain nightly-2024-02-08
+RUN rustup target add wasm32-unknown-unknown --toolchain=nightly-2024-02-08
 RUN apt install -y lsb-release wget software-properties-common gnupg
 RUN bash -c "$(wget -O - https://apt.llvm.org/llvm.sh 17)"
 RUN rustup component add rustfmt
