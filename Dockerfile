@@ -4,11 +4,8 @@ FROM rust:slim-bullseye
 # Install ling build tools
 RUN apt update && apt install -y cmake clang build-essential llvm git
 
-# Set the working directory to /usr/src/app
-WORKDIR /usr/src/app
-
 # Install rust tools
-RUN rustup default 1.77.2
+RUN rustup default 1.81.0
 RUN rustup target add wasm32-unknown-unknown
 RUN rustup component add rustfmt
 RUN rustup component add clippy
@@ -17,9 +14,10 @@ RUN rustup component add clippy
 RUN cargo install cargo-audit
 
 # Install Scrypto
-RUN cargo install --force radix-clis@1.2.0
+RUN cargo install --force radix-clis@1.3.0
+
+# Check if scrypto is installed
+RUN scrypto --version
 
 # Set working directory as /src
 WORKDIR /src
-
-ENTRYPOINT ["scrypto", "test", "--path", "/src"]
